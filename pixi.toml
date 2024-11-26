@@ -7,8 +7,10 @@ platforms = ["osx-arm64"]
 version = "0.1.0"
 
 [tasks]
-build = { cmd = "cmake -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING:BOOL=ON -DCMAKE_INSTALL_PREFIX=./install -GNinja -S. -Bbuild-pixi  && cmake --build build-pixi --config Release"}
-test = { cmd = "ctest ", cwd="build-pixi", depends_on=["build"]}
+build = { cmd = "cmake -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING:BOOL=ON -DCMAKE_INSTALL_PREFIX=./install -GNinja -S. -Bbuild-pixi  && cmake --build build-pixi --config Release" }
+test = { cmd = "ctest --output-on-failure", cwd = "build-pixi", depends_on = [
+    "build",
+] }
 
 [dependencies]
 compilers = ">=1.8.0,<2"
