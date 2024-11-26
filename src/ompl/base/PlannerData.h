@@ -111,6 +111,7 @@ namespace ompl
             {
                 ar &tag_;
                 // Serialization of the state pointer is handled by PlannerDataStorage
+                printf("Serialized tag %d\n", tag_);
             }
 
             /// \brief The state represented by this vertex

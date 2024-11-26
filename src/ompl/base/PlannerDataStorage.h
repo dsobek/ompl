@@ -148,6 +148,7 @@ namespace ompl
                     ar &v_;
                     ar &state_;
                     ar &type_;
+                    printf("Serialized type %d\n", type_);
                 }
 
                 const PlannerDataVertex *v_;

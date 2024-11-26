@@ -11,6 +11,7 @@ if (OMPL_BUILD_TESTS)
     file(TO_NATIVE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/resources" TEST_RESOURCES_DIR)
     string(REPLACE "\\" "\\\\" TEST_RESOURCES_DIR "${TEST_RESOURCES_DIR}")
     add_definitions(-DTEST_RESOURCES_DIR=\"${TEST_RESOURCES_DIR}\")
+    # add_compile_options(-target arm64-apple-darwin23.6.0 -fsanitize=address)
 
     # Test datastructures implementation
     add_ompl_test(test_adjacency_list datastructures/adjacency_list.cpp)
@@ -42,6 +43,9 @@ if (OMPL_BUILD_TESTS)
     add_ompl_test(test_state_spaces base/state_spaces.cpp)
     add_ompl_test(test_state_storage base/state_storage.cpp)
     add_ompl_test(test_planner_data base/planner_data.cpp)
+
+    target_compile_options(test_planner_data PRIVATE -fsanitize=address)
+    target_link_options(test_planner_data PRIVATE -fsanitize=address)
 
     if(NOT MSVC)
       add_ompl_test(test_ptc base/ptc.cpp)
