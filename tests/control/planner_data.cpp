@@ -542,8 +542,9 @@ BOOST_AUTO_TEST_CASE(Serialization)
 
     control::PlannerData data2(si);
     control::PlannerDataStorage storage;
-    storage.store(data, "testdata");
-    storage.load("testdata", data2);
+    // Require that serialization and deserialization passes, as rest of test is useless without.
+    BOOST_REQUIRE( storage.store(data, "testdata") );
+    BOOST_REQUIRE( storage.load("testdata", data2) );
 
     // Verify that data == data2
     BOOST_CHECK_EQUAL ( data2.numVertices(), states.size() );
